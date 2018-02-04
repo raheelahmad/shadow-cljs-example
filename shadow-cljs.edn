@@ -1,0 +1,24 @@
+{
+ ;; single dependency vec; no need for dev, test, etc.
+ ;; npm dependencies are installed via npm w/ package.json
+ :dependencies
+ [[cider/cider-nrepl "0.16.0"]
+  [reagent "0.7.0"]]
+
+ :source-paths
+ ["src"]
+
+ :nrepl {:port 8223
+         :middleware []}
+
+ :builds
+ {:app {:target :browser
+        :output-dir "public/js/compiled"
+        :asset-path "/js/compiled"
+        :modules {:main {:entries [myapp.core]}}
+        :devtools         {:http-root    "public"
+                           :http-handler shadow.http.push-state/handle
+                           :http-port    8280
+                           :after-load   myapp.core/mount-root
+                           }}
+        }}
